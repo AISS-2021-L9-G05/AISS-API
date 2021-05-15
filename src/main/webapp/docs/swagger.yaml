@@ -1,0 +1,387 @@
+openapi: 3.0.0
+servers:
+  - url: 'http://localhost:8089/api'
+info:
+  description: AISS-2021-L9-G05 API
+  version: 1.0.0-aos3
+  title: AISS-API
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: phones
+    description: Phones
+  - name: brands
+    description: Brands of phones
+paths:
+  /phones:
+    get:
+      tags:
+        - phones
+      summary: Get phones
+      description: Get all phones
+      operationId: getPhones
+      parameters:
+        - name: order
+          in: query
+          description: Order results by name, release date or price
+          required: false
+          schema:
+            type: string
+            enum:
+              - name
+              - '-name'
+              - releaseDate
+              - '-releaseDate'
+              - price
+              - '-price'
+        - name: q
+          in: query
+          description: Query to filter
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description:  Maximum number of results
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+        - name: offset
+          in: query
+          description: Offset of the results
+          required: false
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+      responses:
+        '200':
+          description: Search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Phone'
+        '400':
+          description: Bad request
+    post:
+      tags:
+        - phones
+      summary: Create a phone
+      description: Create a phone
+      operationId: createPhone
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Phone'
+        description: Phone to create
+        required: true
+      responses:
+        '201':
+          description: Phone created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Phone'
+        '400':
+          description: Bad request
+    put:
+      tags:
+        - phones
+      summary: Update a phone
+      description: Update a phone
+      operationId: updatePhone
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Phone'
+        description: Phone to update
+        required: true
+      responses:
+        '204':
+          description: Phone updated
+        '400':
+          description: Bad request
+        '404':
+          description: Phone not found
+  '/phones/{id}':
+    get:
+      tags:
+        - phones
+      summary: Get one phone
+      description: Get one phone
+      operationId: getPhone
+      parameters:
+        - name: id
+          in: path
+          description: Id of the phone
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Phone matching id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Phone'
+        '404':
+          description: Phone not found
+    delete:
+      tags:
+        - phones
+      summary: Delete phone
+      description: Deletes the phone specified by the id.
+      operationId: deletePhone
+      parameters:
+        - name: id
+          in: path
+          description: Id of the phone
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Phone deleted
+        '404':
+          description: Phone not found
+  /brands:
+    get:
+      tags:
+        - brands
+      summary: Get brands
+      description: Get all brands
+      operationId: getBrands
+      parameters:
+        - name: order
+          in: query
+          description: Order results by name
+          required: false
+          schema:
+            type: string
+            enum:
+              - name
+              - '-name'
+        - name: isEmpty
+          in: query
+          description: Filter brands with no phones
+          required: false
+          schema:
+            type: boolean
+        - name: name
+          in: query
+          description: Filter brands by name
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Brand'
+        '400':
+          description: Bad request
+    post:
+      tags:
+        - brands
+      summary: Create a brand
+      description: Create a brand
+      operationId: createBrand
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Brand'
+        description: Brand to create
+      responses:
+        '201':
+          description: Brand created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Brand'
+        '400':
+          description: Bad request
+    put:
+      tags:
+        - brands
+      summary: Update a brand
+      description: Update a brand
+      operationId: updateBrand
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Brand'
+        description: Brand to update
+      responses:
+        '204':
+          description: Brand updated
+        '400':
+          description: Bad request
+        '404':
+          description: Brand not found
+  '/brands/{id}':
+    get:
+      tags:
+        - brands
+      summary: Get a brand
+      description: Get a brand
+      operationId: getBrand
+      parameters:
+        - name: id
+          in: path
+          description: Id of the brand
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Brand found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Brand'
+        '404':
+          description: Brand not found
+    delete:
+      tags:
+        - brands
+      summary: Delete brand
+      description: Delete brand
+      operationId: deleteBrand
+      parameters:
+        - name: id
+          in: path
+          description: Id of the brand
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Brand deleted
+        '404':
+          description: Brand not found
+  '/brands/{brandId}/{phoneId}':
+    post:
+      tags:
+        - brands
+      summary: Add phone to brand
+      description: Add phone to brand
+      operationId: addPhoneToBrand
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+      parameters:
+        - name: brandId
+          in: path
+          description: Id of the brand
+          required: true
+          schema:
+            type: string
+        - name: phoneId
+          in: path
+          description: Id of the phone
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Phone added to brand
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Brand'
+        '400':
+          description: Bad request
+        '404':
+          description: Brand or phone not found
+    delete:
+      tags:
+        - brands
+      summary: Delete phone from brand
+      description: Delete phone from brand
+      operationId: deletePhoneFromBrand
+      parameters:
+        - name: brandId
+          in: path
+          description: Id of the brand
+          required: true
+          schema:
+            type: string
+        - name: phoneId
+          in: path
+          description: Id of the phone
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Phone deleted from brand
+        '404':
+          description: Brand or phone not found
+components:
+  schemas:
+    Phone:
+      type: object
+      required:
+        - title
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        price:
+          type: string
+        releaseDate:
+          type: string
+        size:
+          type: string
+        resolution:
+          type: string
+      example:
+        id: p1
+        name: Samsung Galaxy A52
+        price: '349,90 €'
+        releaseDate: '17-03-2021'
+        size: '159,9 x 75,1 x 8,4 mm'
+        resolution: '2.400 x 1.080 px'
+    Brand:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        foundationDate:
+          type: string
+        phonesSold:
+          type: string
+        phones:
+          type: array
+          items:
+            $ref: '#/components/schemas/Phone'
+      example:
+        id: b0
+        name: Samsung
+        foundationDate: '01-03-1938'
+        phonesSold: '270 millones, Año 2020'
+        phones:
+          - id: p1
+            name: Samsung Galaxy A52
+            price: '349,90 €'
+            releaseDate: '17-03-2021'
+            size: '159,9 x 75,1 x 8,4 mm'
+            resolution: '2.400 x 1.080 px'
