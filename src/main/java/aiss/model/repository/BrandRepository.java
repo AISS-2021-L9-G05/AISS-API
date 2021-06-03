@@ -8,7 +8,7 @@ import aiss.model.Phone;
 public interface BrandRepository {
 	
 	
-	// Songs
+	// Phones
 	public void addPhone(Phone p);
 	public Collection<Phone> getAllPhones();
 	public Phone getPhone(String phoneId);

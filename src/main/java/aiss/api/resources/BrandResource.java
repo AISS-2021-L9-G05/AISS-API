@@ -94,13 +94,13 @@ public class BrandResource {
 	@Produces("application/json")
 	public Brand get(@PathParam("id") String id)
 	{
-		Brand list = repository.getBrand(id);
+		Brand brand = repository.getBrand(id);
 		
-		if (list == null) {
+		if (brand == null) {
 			throw new NotFoundException("The brand with id="+ id +" was not found");			
 		}
 		
-		return list;
+		return brand;
 	}
 	
 	@POST
@@ -126,7 +126,7 @@ public class BrandResource {
 	
 	@PUT
 	@Consumes("application/json")
-	public Response updatePlaylist(Brand brand) {
+	public Response updateBrand(Brand brand) {
 		Brand oldbrand = repository.getBrand(brand.getId());
 		if (oldbrand == null) {
 			throw new NotFoundException("The brand with id="+ brand.getId() +" was not found");			
@@ -167,7 +167,7 @@ public class BrandResource {
 	@Path("/{brandId}/{phoneId}")
 	@Consumes("text/plain")
 	@Produces("application/json")
-	public Response addSong(@Context UriInfo uriInfo,@PathParam("brandId") String brandId, @PathParam("phoneId") String phoneId)
+	public Response addPhone(@Context UriInfo uriInfo,@PathParam("brandId") String brandId, @PathParam("phoneId") String phoneId)
 	{				
 		
 		Brand brand = repository.getBrand(brandId);
@@ -195,14 +195,14 @@ public class BrandResource {
 	
 	@DELETE
 	@Path("/{brandId}/{phoneId}")
-	public Response removeSong(@PathParam("brandId") String brandId, @PathParam("phoneId") String phoneId) {
-		Brand playlist = repository.getBrand(brandId);
-		Phone song = repository.getPhone(phoneId);
+	public Response removePhone(@PathParam("brandId") String brandId, @PathParam("phoneId") String phoneId) {
+		Brand brand = repository.getBrand(brandId);
+		Phone phone = repository.getPhone(phoneId);
 		
-		if (playlist==null)
+		if (brand==null)
 			throw new NotFoundException("The brand with id=" + brandId + " was not found");
 		
-		if (song == null)
+		if (phone == null)
 			throw new NotFoundException("The phone with id=" + phoneId + " was not found");
 		
 		

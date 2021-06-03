@@ -1,12 +1,13 @@
 openapi: 3.0.0
 servers:
+  - url: 'https://aiss-2021-l9-g05-api.appspot.com/api'
   - url: 'http://localhost:8089/api'
 info:
   description: AISS-2021-L9-G05 API
   version: 1.0.0-aos3
   title: AISS-API
   contact:
-    email: you@your-company.com
+    email: rafaestrada3@gmail.com
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
@@ -342,9 +343,9 @@ components:
         name:
           type: string
         price:
-          type: string
+          type: double
         releaseDate:
-          type: string
+          type: LocalDate
         size:
           type: string
         resolution:
@@ -352,8 +353,19 @@ components:
       example:
         id: p1
         name: Samsung Galaxy A52
-        price: '349,90 €'
-        releaseDate: '17-03-2021'
+        price: 349.90
+        releaseDate:
+          year: 2021,
+          month: MARCH
+          dayOfMonth: 17,
+          dayOfWeek: WEDNESDAY
+          era: "CE"
+          dayOfYear: 76,
+          leapYear: false,
+          chronology:
+            id: ISO,
+            calendarType: iso8601
+          monthValue: 3
         size: '159,9 x 75,1 x 8,4 mm'
         resolution: '2.400 x 1.080 px'
     Brand:
@@ -366,7 +378,7 @@ components:
         name:
           type: string
         foundationDate:
-          type: string
+          type: LocalDate
         phonesSold:
           type: string
         phones:
@@ -376,12 +388,34 @@ components:
       example:
         id: b0
         name: Samsung
-        foundationDate: '01-03-1938'
+        foundationDate:
+          year: 1938,
+          month: MARCH
+          dayOfMonth: 1
+          dayOfWeek: TUESDAY
+          era: CE
+          dayOfYear: 60
+          leapYear: false
+          chronology:
+            id: ISO
+            calendarType: iso8601
+          monthValue: 3
         phonesSold: '270 millones, Año 2020'
         phones:
           - id: p1
             name: Samsung Galaxy A52
-            price: '349,90 €'
-            releaseDate: '17-03-2021'
+            price: 349.90
+            releaseDate:
+              year: 2021,
+              month: MARCH
+              dayOfMonth: 17,
+              dayOfWeek: WEDNESDAY
+              era: "CE"
+              dayOfYear: 76,
+              leapYear: false,
+              chronology:
+                id: ISO,
+                calendarType: iso8601
+              monthValue: 3
             size: '159,9 x 75,1 x 8,4 mm'
             resolution: '2.400 x 1.080 px'

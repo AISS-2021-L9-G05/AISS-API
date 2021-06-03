@@ -58,15 +58,15 @@ public class PhoneResource {
 	{
 		List<Phone> result = new ArrayList<Phone>();
 		
-		for (Phone song : repository.getAllPhones()) {
+		for (Phone phone : repository.getAllPhones()) {
 			if (q == null
-					|| song.getName().toLowerCase().contains(q.toLowerCase())
-					|| song.getPrice().toLowerCase().contains(q.toLowerCase())
-					|| song.getReleaseDate().toLowerCase().contains(q.toLowerCase())
-					|| song.getSize().toLowerCase().contains(q.toLowerCase())
-					|| song.getResolution().toLowerCase().contains(q.toLowerCase())
+					|| phone.getName().toLowerCase().contains(q.toLowerCase())
+					|| phone.getPrice().toString().toLowerCase().contains(q.toLowerCase())
+					|| phone.getReleaseDate().toString().toLowerCase().contains(q.toLowerCase())
+					|| phone.getSize().toLowerCase().contains(q.toLowerCase())
+					|| phone.getResolution().toLowerCase().contains(q.toLowerCase())
 					) {
-				result.add(song);
+				result.add(phone);
 			}
 		}
 		
@@ -123,7 +123,7 @@ public class PhoneResource {
 				
 			} else {
 				
-				for (Phone song : result) { resultPagination.add(song); }
+				for (Phone phone : result) { resultPagination.add(phone); }
 				
 			}
 		} else {

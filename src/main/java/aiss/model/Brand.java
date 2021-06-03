@@ -1,5 +1,6 @@
 package aiss.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ public class Brand {
 
 	private String id;
 	private String name;
-	private String foundationDate;
+	private LocalDate foundationDate;
 	private String phonesSold;
 	private List<Phone> phones;
 	
@@ -37,11 +38,11 @@ public class Brand {
 		this.name = name;
 	}
 
-	public String getFoundationDate() {
+	public LocalDate getFoundationDate() {
 		return foundationDate;
 	}
 
-	public void setFoundationDate(String foundationDate) {
+	public void setFoundationDate(LocalDate foundationDate) {
 		this.foundationDate = foundationDate;
 	}
 	

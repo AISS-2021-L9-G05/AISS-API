@@ -21,8 +21,21 @@ Cada **teléfono** tiene un identificador, _nombre, precio, fecha de salida, tam
 {
 	"id":"p0",
 	"title":"Samsung Galaxy A52",
-	"price":"349,90 €",
-	"releaseDate":"17-03-2021",
+	"price":349.90,
+	"releaseDate":{
+	    "year": 2021,
+		"month": "MARCH",
+		"dayOfMonth": 17,
+		"dayOfWeek": "WEDNESDAY",
+		"era": "CE",
+		"dayOfYear": 76,
+		"leapYear": false,
+		"chronology": {
+			"id": "ISO",
+			"calendarType": "iso8601"
+		},
+		"monthValue": 3
+	},
 	"size":"159,9 x 75,1 x 8,4 mm",
 	"resolution":"2.400 x 1.080 px"
 }
@@ -47,14 +60,40 @@ Una **marca** tiene un _identificador, nombre, fecha de fundación, teléfonos v
 {
 	"id":"b0",
 	"name":"Samsung",
-	"foundationDate":"01-03-1938",
+	"foundationDate":{
+		"year": 1938,
+		"month": "MARCH",
+		"dayOfMonth": 1,
+		"dayOfWeek": "TUESDAY",
+		"era": "CE",
+		"dayOfYear": 60,
+		"leapYear": false,
+		"chronology": {
+			"id": "ISO",
+			"calendarType": "iso8601"
+		},
+		"monthValue": 3
+	},
 	"phonesSold":"270 millones, Año 2020",
 	"phones":[
 		{
 			"id":"p0",
 			"title":"Samsung Galaxy A52",
-			"price":"349,90 €",
-			"releaseDate":"17-03-2021",
+			"price":349.90,
+			"releaseDate":{
+				"year": 2021,
+				"month": "MARCH",
+				"dayOfMonth": 17,
+				"dayOfWeek": "WEDNESDAY",
+				"era": "CE",
+				"dayOfYear": 76,
+				"leapYear": false,
+				"chronology": {
+					"id": "ISO",
+					"calendarType": "iso8601"
+				},
+				"monthValue": 3
+			},
 			"size":"159,9 x 75,1 x 8,4 mm",
 			"resolution":"2.400 x 1.080 px"
 		},
